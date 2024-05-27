@@ -12,15 +12,13 @@ public class TesteObserver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Observador estacao1 = new Observador();
-        
-        Estacao observer1 = new Estacao(estacao1);
-        Estacao observer2 = new Estacao(estacao1);        
-        
-        estacao1.setMes(1);
-        
-        estacao1.removeObserver(observer2);
-        
-        estacao1.setMes(6);
+        Estacao e = new Estacao();
+        Observador o1 = new Observador();
+        Observador o2 = new Observador();
+        e.addObserver(o1);
+        e.addObserver(o2);
+        e.setMes(1);
+        e.removeObserver(o2);
+        e.setMes(8);
     }
 }

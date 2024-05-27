@@ -9,40 +9,32 @@
  */
 import java.util.*;
 
-public class Estacao implements Observer{  
-    private int mes = 1;
-    private String est; 
-    private Observador observador;
+public class Estacao{    
     
-    public Estacao(Observador observador){
-        this.observador = observador;
-        observador.addObserver(this);
+    private int mes;
+  
+    private List<Observer> observers;
+    
+    public Estacao(){
+        observers = new ArrayList<Observer>();
     }
     
-    public void calcEstacao(){
-        if(mes >= 1 &&  mes <= 3){
-            est = "Verao"; 
-            System.out.print(est);
-        } else if(mes >= 4 &&  mes <= 6){
-            est = "Inverno"; 
-            System.out.print(est);
-        } else if(mes >= 7 &&  mes <= 9){            
-            est = "Outono";   
-            System.out.print(est);
-        } else {
-            est = "Primavera";   
-            System.out.print(est);
+    public void addObserver(Observer o){
+        observers.add(o);
+    }
+    
+    public void removeObserver(Observer o){
+        observers.remove(o);
+    }
+   
+    public void notifyObservers(){
+        for(Observer observer : observers){
+            observer.update(mes);
         }
     }
     
-    public void update(int m){
-        this.mes = m;
-        mostrarEstacao();        
-    }
-    
-    public void mostrarEstacao(){
-       System.out.print("A estacao e ");
-       calcEstacao(); 
-       System.out.println();
+    public void setMes(int m){
+        mes = m;
+        notifyObservers();
     }
 }

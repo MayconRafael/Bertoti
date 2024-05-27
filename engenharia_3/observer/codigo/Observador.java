@@ -7,43 +7,25 @@
  *
  * @author Fatec
  */
-import java.util.*;
 
-public class Observador{
+public class Observador implements Observer{   
+
+    private int mes;
     
-    private List<Observer> observers;
-    private int mes = 1;
-    private String est;     
-    
-    public Observador(){
-        observers = new ArrayList<Observer>();
+    public void update(int m){
+        mes = m;
+        display();        
     }
-    
-    public void addObserver(Observer o){
-        observers.add(o);
+
+    public void display(){
+        if(mes >= 1 &&  mes <= 3){      
+            System.out.println("A estacao e verao");          
+        } else if(mes >= 4 &&  mes <= 6){
+            System.out.println("A estacao e inverno"); 
+        } else if(mes >= 7 &&  mes <= 9){            
+            System.out.println("A estacao e outono"); 
+        } else {
+            System.out.println("A estacao e primavera"); 
+        }          
     }
-    
-    public void removeObserver(Observer o){
-        observers.remove(o);
-    }
-   
-    public void notifyObservers(){
-        for(Observer observer : observers){
-            observer.update(mes);
-        }
-    }
-    
-    public void setMes(int m){
-        this.mes = m;
-        notifyObservers();
-    }   
-    
-    public int getMes() {
-	return mes;
-    }
-    
-    public String getEstacao() {
-	return est;
-    }
-    
 }
